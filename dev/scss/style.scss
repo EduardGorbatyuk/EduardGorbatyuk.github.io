@@ -1,0 +1,20 @@
+$color-white: #fffdfc;
+$color-light-grey: #e5e3e2;
+$color-midle-grey: #bfbebd;
+$color-grey: #807f7e;
+$color-dark-grey: #403f3f;
+$color-gold: #c9aa03;
+
+@import 'fonts';
+@import  'reset';
+@import 'tabs';
+
+html {
+    font-size: 12px;
+    font-family: "RobotoMedium";
+    background-color: $color-light-grey;
+}
+
+@import 'header';
+@import 'main';
+@import 'footer';

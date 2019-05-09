@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EGScore</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap-grid.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css">
+</head>
+<body>
+<div class="container">
+<div class="header">
+    <div class="row align-items-center" >
+        <div class="col-md-5 logo">
+            <img src="../images/logo.png" alt="Логотип">
+        </div>
+
+        <div class="col-md-4 string">
+            <p>Результаты онлайн и счет матчей</p>
+        </div>
+
+        <div class="col-md-3 btns">           
+            <button class="reg">
+                <p>Настройки</p><i class="fa fa-cog"></i>
+            </button>           
+            <% if(!user.id) { %>
+            <button class="auth">
+                <p>Вход</p><i class="fa fa-sign-in-alt"></i>
+            </button>
+            <% } else { %>
+            <button class="out">
+                <p><%= user.email %></p><i class="fa fa-sign-in-alt"></i>
+            </button>
+            <% } %>
+        </div>    
+    </div>
+</div>
+<div class="main">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="left-sidebar">
+                <button class="leftbar_btn">
+                    <i class="fa fa-star"></i>
+                        Мои лиги
+                </button>
+                <ul class="left-side-menu" id="my_league">
+                    
+                </ul>
+                <hr>
+                <button class="leftbar_btn">
+                    <i class="fa fa-star"></i>
+                        Мои команды
+                </button>
+                <ul class="left-side-menu">
+                    <li><i class="fa fa-flag-usa"></i><a href="#">Лига чемпионов</a><i class="fas fa-times"></i></li><hr>
+                    <li><i class="fa fa-flag-usa"></i><a href="#">Премьер-лига</a><i class="fas fa-times"></i></li><hr>
+                    <li><i class="fa fa-flag-usa"></i><a href="#">Примера</a><i class="fas fa-times"></i></li><hr>
+                    <li><i class="fa fa-flag-usa"></i><a href="#">Бундеслига</a><i class="fas fa-times"></i></li>
+                </ul>
+                <hr>                        
+                <p>Страны</p>
+                <hr>
+                <% for(var i = 0; i < data.cont.length ;i++) {%>
+                    <button class="leftbar-btn country">
+                        <i class="fas fa-futbol"></i>
+                           <%=data.cont[i].country_name%>
+                        <i class="fas fa-caret-down"></i>
+                    </button>
+                    <ul class="left-sidebar-menu">
+                        <% for(var j = 0; j < data.leagues.length ;j++) {%>
+                        <% if (data.cont[i].country_name == data.leagues[j].country_name) {%>
+                            <li><i class="fa fa-flag-usa"></i><a href="#"><%=data.leagues[j].league_name%></a><i class="fas fa-plus"></i></li><hr> 
+                        <%}}%>
+                    </ul>
+                    <hr>
+                <%}%>
+
+            </div>
+        </div>
+    <div class="col-md-7" >

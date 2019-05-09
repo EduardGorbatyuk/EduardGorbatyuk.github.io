@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EGScore</title>
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="row align-items-center" >
+                <div class="col-md-5 logo">
+                    <img src="../images/logo.png" alt="Логотип">
+                    <p>Результаты онлайн и счет матчей</p>
+                </div>
+
+                <div class="col-md-4 string">
+                    <p>Результаты онлайн и счет матчей</p>
+                </div>
+
+                <div class="col-md-3 btns">
+                    <button class="reg">
+                        <p>Настройки</p><i class="fa fa-cog"></i>
+                    </button>
+                    <button class="auth">
+                        <p>Вход</p><i class="fa fa-sign-in-alt"></i>
+                    </button>
+                </div>    
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="left-sidebar">
+                        <button class="leftbar-btn">
+                            <i class="fa fa-star"></i>
+                                Мои лиги (4)
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <ul class="left-sidebar-menu">
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Лига чемпионов</a><i class="fas fa-times"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Премьер-лига</a><i class="fas fa-times"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Примера</a><i class="fas fa-times"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Бундеслига</a><i class="fas fa-times"></i></li>
+                        </ul>
+                        <hr>
+                        <button class="leftbar-btn">
+                            <i class="fa fa-star"></i>
+                                Мои команды(3)
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <ul class="left-sidebar-menu">
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Лига чемпионов</a><i class="fas fa-times"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Премьер-лига</a><i class="fas fa-times"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Примера</a><i class="fas fa-times"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Бундеслига</a><i class="fas fa-times"></i></li>
+                        </ul>
+                        <hr>                        
+                        <p>Страны</p>
+                        <hr>
+                        <button class="leftbar-btn country">
+                            <i class="fas fa-futbol"></i>
+                                Австрия
+                            <i class="fas fa-angle-right"></i>
+                            </button>
+                        <ul class="left-sidebar-menu">
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Лига чемпионов</a><i class="fas fa-plus"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Премьер-лига</a><i class="fas fa-plus"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Примера</a><i class="fas fa-plus"></i></li><hr>
+                            <li><i class="fa fa-flag-usa"></i><a href="#">Бундеслига</a><i class="fas fa-plus"></i></i></li>
+                        </ul>
+                        <hr>
+
+                    </div>
+                </div>
+                <div class="col-md-7" >
+                    <div class="dateofmatch">
+                        <button onclick="">01.05 Пн</button>
+                        <button onclick="">02.05 Вт</button>                 
+                        <button onclick="">02.05 Ср</button>                 
+                        <button onclick="">02.05 Чт</button>                 
+                        <button onclick="">02.05 Пт</button>                 
+                        <button onclick="" style="background-color: #c9aa03">02.05 Сб</button>                 
+                        <button onclick="">02.05 Вс</button>                 
+                        <button onclick="">02.05 Пн</button>                 
+                        <button onclick="">02.05 Вт</button>                 
+                        <button onclick="">02.05 Ср</button>                 
+                        <button onclick="">02.05 Чт</button>                                 
+                    </div>
+                    <div class="tabContainer">
+                            <div class="buttonContainer">
+                                <button onclick="showPanel(0,'#403f3f')">Все</button>
+                                <button onclick="showPanel(1,'#403f3f')">Live</button>
+                                <button onclick="showPanel(2,'#403f3f')">Завершенные</button>
+                                <button onclick="showPanel(3,'#403f3f')">Расписание</button>
+                                <button onclick="showPanel(4,'#403f3f')">Мои игры</button>
+                            </div>
+                            <div class="tabPanel">
+                                <table id="england">
+                                    <colgroup>
+                                        <col width=8%>
+                                        <col width=14%>
+                                        <col width=33%>
+                                        <col width=8%>
+                                        <col width=33%>
+                                        <col width=4%>
+                                    </colgroup>
+                                        <tr>
+                                                <th colspan="6"><i class="fa fa-flag-usa"></i>Чемпионат Европы<i class="fa fa-star"></i></th>
+                                              </tr>
+                                              <tr>
+                                                <td>12:00</td>
+                                                <td>Завершен</td>
+                                                <td>Республика Беларусь</td>
+                                                <td>0:1</td>
+                                                <td>Германия</td>
+                                                <td><i class="fas fa-plus"></i></td>
+                                              </tr>
+                                              <tr>
+                                                <td>13:00</td>
+                                                <td>67'</td>
+                                                <td>Швеция</td>
+                                                <td>2:2</td>
+                                                <td>Россия</td>
+                                                <td><i class="fas fa-plus"></i></td>
+                                              </tr>
+                                </table>
+                            </div>
+                            <div class="tabPanel"></div>
+                            <div class="tabPanel">Tab 3:Content</div>
+                            <div class="tabPanel">Tab 4:Content</div>
+                            <div class="tabPanel">Tab 4:Content</div>
+                        </div>
+                </div>
+                <div class="col-md-3">
+                        <table id="ttable">
+                                <colgroup>
+                                    <col width=5%>
+                                    <col width=30%>
+                                    <col width=5%>
+                                    <col width=5%>
+                                    <col width=5%>
+                                    <col width=5%>
+                                    <col width=11%>
+                                    <col width=6%>
+                                </colgroup>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Команда</th>
+                                        <th>И</th>
+                                        <th>В</th>
+                                        <th>Н</th>
+                                        <th>П</th>
+                                        <th>Г</th>
+                                        <th>0</th>
+                                          </tr>
+                                          <tr>
+                                            <td>10</td>
+                                            <td>Манчестер Сити</td>
+                                            <td>12</td>
+                                            <td>14</td>
+                                            <td>12</td>
+                                            <td>12</td>
+                                            <td>12:121</td>
+                                            <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Арсенал</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>12</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                                          <tr>
+                                                <td>1</td>
+                                                <td>Манчестер Юнайтед</td>
+                                                <td>12</td>
+                                                <td>14</td>
+                                                <td>12</td>
+                                                <td>12</td>
+                                                <td>12:121</td>
+                                                <td>123</td>
+                                          </tr>
+                            </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/tabs.js"></script>
+    <script>
+            /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+            var dropdown = document.getElementsByClassName("leftbar-btn");
+            var i;
+            
+            for (i = 0; i < dropdown.length; i++) {
+              dropdown[i].addEventListener("click", function() {
+              this.classList.toggle("active");
+              var dropdownContent = this.nextElementSibling;
+              if (dropdownContent.style.display === "block") {
+              dropdownContent.style.display = "none";
+              } else {
+              dropdownContent.style.display = "block";
+              }
+              });
+            }
+            </script>
+</body>
+</html>

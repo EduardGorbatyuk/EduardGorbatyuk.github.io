@@ -1,0 +1,65 @@
+.logo {
+    padding: 15px;
+}
+
+.header img:hover {
+    color: #fff;
+}
+
+.timelang {
+    display:inline;
+}
+
+.fa-sign-in-alt, .fa-cog {
+    font-size: 30px;
+    color: #c9aa03;
+}
+
+.btns p{
+    font-family: "RobotoMedium";
+    display: inline;
+    color: #000;
+}
+
+.btns button{
+    margin-right: 5px;
+    border: 1px solid #000;
+    height: 26px;
+    font-family: "RobotoBold";
+    font-size: 14px;
+    border-radius: 2px;
+    background-color: #c9aa03;
+    color: #000;
+    cursor: pointer;
+    float: right;
+    transition: 0.5s;
+    padding: 4px 5px;
+}
+
+.fa-sign-in-alt, .fa-cog {
+    font-size: 16px;
+    color: #000;
+    float: right;
+    padding-left: 5px;
+}
+
+button:hover {
+    color: #000;
+    background-color: #ffd804;
+}
+
+.header {
+    background: #04883b;
+}
+
+.container {
+    padding: 0 0;
+    background-color: #fff;
+}
+
+.string p {
+    font-size: 16px;
+    padding: 6px 0px 6px 0px;
+    color: #fff;
+}
+

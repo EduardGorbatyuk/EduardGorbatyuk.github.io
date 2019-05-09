@@ -1,0 +1,314 @@
+.modal{
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+  }
+  
+  .container {
+    width: 100%;
+    height: 200px;
+    background-color: #e7e7f6;
+    border-radius: 5px;
+    z-index: 2;
+  }
+  
+  .overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .5s ease;
+  }
+  
+  .overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .main-popup {
+    position: fixed;
+    left: 0;
+    top: 30px;
+    margin: 0;
+    width: 100%;
+    height: 340px;
+    background-color: #e7e7f6;
+    border-radius: 5px;
+    z-index: 15;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all .5s ease;
+  }
+  
+  .main-popup.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(10px);
+    transition: all .5s ease;
+  }
+  
+  @media (min-width: 500px) {
+    .main-popup {
+      width: 500px;
+      left: 50%;
+      margin: 0 0 0 -250px;
+    }
+  }
+  
+  .popup-header {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    height: 30px;
+    width: 100%;
+  }
+  
+  #popup-close-button a {
+    position: absolute;
+    right: 10px;
+    top: -30px;
+    width: 22px;
+    height: 22px;
+  }
+  
+  #popup-close-button a::before {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 3px;
+    height: 25px;
+    background-color: #fff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  #popup-close-button a::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 3px;
+    height: 25px;
+    background-color: #fff;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  
+  .popup-header ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .popup-header ul li {
+    text-align: center;
+    list-style: none;
+    width: 50%;
+    float: left;
+  }
+  
+  .popup-header ul li a {
+    display: block;
+    padding: 20px 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+  }
+  
+  #sign-in {
+    background-color: $color-dark-grey;
+    color: #fff;
+    border-radius: 5px 0 0 0;
+  }
+  
+  #sign-in.active {
+    color: #000;
+    background-color: transparent;
+  }
+  
+  #register {
+    background-color: $color-dark-grey;
+    color: #fff;
+    border-radius: 0 5px 0 0;
+  }
+  
+  #register.active {
+    color: #000;
+    background-color: transparent;
+  }
+  
+  .popup-content {
+    height: 400px;
+    overflow: hidden;
+  }
+  
+  form.sign-in {
+    position: relative; 
+    top: 25px;
+    left: 0;
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+    opacity: 1;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    -o-transition: all .35s;
+    transition: all .35s;
+  }
+  
+  form.sign-in.move-left {
+    opacity: 0;
+    transform: translateX(-450px);
+  }
+  
+  form label {
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+    color: #000;
+    margin-left: 23px;
+  }
+
+  
+  input#submit-sing-in, input#submit-register {
+    background-color: #c9aa03;
+    color: #000;
+    height: 40px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 15px;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+    border: 1px solid black;
+    transition: 0.5s;
+  }
+
+  input#submit-sing-in:hover, input#submit-register:hover {
+    background-color: #ffd804;
+  }
+  
+  form.register {
+    position: relative; 
+    top: -211px;
+    left: 0;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateX(450px);
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    -o-transition: all .35s;
+    transition: all .35s;
+  }
+  
+  form.register.move-left {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  form.sign-in input {
+    border-radius: 5px;
+    width: 90%;
+    height: 30px;
+    margin: 5px 5% 15px 5%;
+    padding: 10px;
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+    color: #000;
+    outline: none;
+    border: 1px solid #000;
+    &.errorLog {
+      background-color: lighten(red, 45%);
+      border-color: red;
+    }
+  }
+
+  form.register input{
+    border-radius: 5px;
+    width: 90%;
+    height: 30px;
+    margin: 5px 5% 10px 5%;
+    padding: 10px;
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+    color: #000;
+    outline: none;
+    border: 1px solid #000;
+    &.errorinput {
+      background-color: lighten(red, 45%);
+      border-color: red;
+    }
+  }
+  
+  p.check-mark {
+    position: relative;
+    width: 300px;
+    padding-left: 30px;
+    text-align: left;
+    color: #000;
+    font-family: 'RobotoMedium';
+    font-size: 14px;
+  }
+  
+  p.check-mark input {
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    color: #000;
+    outline: none;
+    border: none;
+  }
+  
+  p.check-mark label {
+    margin-left: 5px;
+  }
+.buttonContainer #sign-in, #register {
+    width: 50%;
+    font-size: 14px;
+    padding: 0;
+}
+
+.hidden {
+  height: 50px;
+  .popup-content, .buttonContainer  {
+    display: none;
+  }
+  .popup-header{
+    height: 50px;
+    background-color: lighten(green, 50%);
+    border: 1px solid green;
+    font-size: 14px;
+    padding: 15px 50px;
+    color: green;
+    border-radius: 5px;
+  }
+}
+
+div.error,
+p.error {
+  border: 1px solid red;
+  border-radius: 2px;
+  font-size: 14px;
+  margin: 0px 25px;
+  padding: 10px;
+  background-color: lighten(red, 45%);
+  border-color: red;
+  color: red;
+}
