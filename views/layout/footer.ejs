@@ -1,59 +1,16 @@
-</div>
-<div class="col-md-3">
-        <table class="ttable">
-                <colgroup>
-                    <col width="5%">
-                    <col width="30%">
-                    <col width="5%">
-                    <col width="5%">
-                    <col width="5%">
-                    <col width="5%">
-                    <col width="11%">
-                    <col width="6%">
-                </colgroup>
-                    <tr>
-                        <th>№</th>
-                        <th>Команда</th>
-                        <th>И</th>
-                        <th>В</th>
-                        <th>Н</th>
-                        <th>П</th>
-                        <th>Г</th>
-                        <th>0</th>
-                          </tr>
-                          <% for(var i = 0; i < data.ttable.length; i++) {%>
-                          <tr>
-                            <td><%=data.ttable[i].overall_league_position%></td>                                                        
-                            <td style="text-align: left"><%=data.ttable[i].team_name%></td>                                                        
-                            <td><%=data.ttable[i].overall_league_payed%></td>                                                        
-                            <td><%=data.ttable[i].overall_league_W%></td>                                                        
-                            <td><%=data.ttable[i].overall_league_D%></td>                                                        
-                            <td><%=data.ttable[i].overall_league_L%></td>                                                        
-                            <td><%=data.ttable[i].overall_league_GF%>:<%=data.ttable[i].overall_league_GA%></td>                                                        
-                            <td><%=data.ttable[i].overall_league_PTS%></td>                                                       
-                          </tr>
-                          <%}%>
-            </table>
-</div>
-</div>
-</div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+              <p>3123123123123123</p>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="javascripts/tabs.js"></script>
 <script>
-  // var request = new XMLHttpRequest();
-  // var requestURL = 'https://apifootball.com/api/?action=get_countries&APIkey=004b26f0bdc9085ae7d6916dc3aa7b7a5c81af51dde4720ab74ea13f1759806a';
-  // request.open('GET', requestURL);
-  // request.responseType = 'json';
-  // request.send();
-  // request.onload = function (){
-  //   var qwe = request.response;
-  //   console.log(qwe);
-  // };
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("leftbar-btn");
-        var i;
-        
-        for (i = 0; i < dropdown.length; i++) {
+        var dropdown = document.getElementsByClassName("leftbar-btn");        
+        for (var i = 0; i < dropdown.length; i++) {
           dropdown[i].addEventListener("click", function() {
           this.classList.toggle("active");
           var dropdownContent = this.nextElementSibling;
@@ -68,7 +25,6 @@
         
         </script>
         <nav class="modal">
-              
               </nav>
               <div class="overlay"> </div>
               <div class="main-popup">
@@ -113,17 +69,463 @@
               <script>
               $(document).ready(function() {
 
-                $('.fa-star').on('click', function(e){
-                  var id = e.target.id;
-                  if($(this).hasClass('active')) {
-                    $(this).removeClass('active');
-                    $("li").remove( ":contains('Cup')" );
-                    //$("hr").remove();
-                  } else {
-                    $(this).addClass('active');
-                    $('#my_league').append("<li><i class=\"fa fa-flag-usa\" id="+e.target.id+"></i><a href=\"#\">"+ e.target.id +"</a><i class=\"fas fa-times\"></i></li><hr>");
+                function getWeekDay(date) {
+                  var days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+                  return days[date.getDay()];
+                }
+                var $dateofmatch = $('.dateofmatch');
+                
+                var date = new Date(); 
+             
+                for(var i = date.getDate() - 5; i < date.getDate() + 6; i++) {
+                  var startDate = new Date(date.getFullYear(),date.getMonth(), i);
+                  var dd = startDate.getDate();
+                  if (dd < 10) dd = '0' + dd; 
+                  var mm = startDate.getMonth() + 1;
+                  if (mm < 10) mm = '0' + mm;
+                  var yy = startDate.getFullYear();
+                  if(i == date.getDate())
+                    $dateofmatch.append('<button class="today active" id=' + yy + '-' + mm + '-' + dd + '>'+ dd +'.' +mm + ' '+ getWeekDay(startDate) +'</button>');
+                  else
+                    $dateofmatch.append('<button id=' + yy + '-' + mm + '-' + dd + '>'+ dd +'.' +mm + ' '+ getWeekDay(startDate) +'</button>');
+                }
+
+                function sort(a) {
+                    if($(a).hasClass('active')) {
+                        var b = a.prev();                                       
+                        if(b[0] != undefined) {
+                            if($(b).hasClass('active') && (a.text() < b.text())) { 
+                                a.replaceWith(b.clone());
+                                b.replaceWith(a);
+                                sort(a);
+                            }
+                            else if(!$(b).hasClass('active')){
+                              a.replaceWith(b.clone());
+                              b.replaceWith(a);
+                              sort(a);
+                            }
+                        }
+                        else {return;}
+                    }
+                    else if(a != undefined) {
+                        var d = a.next(); 
+                        if(d[0] != undefined) {
+                            if(!$(d).hasClass('active') && (a.text() > d.text())) { 
+                                a.replaceWith(d.clone());
+                                d.replaceWith(a);
+                                sort(a);
+                            }
+                            else if($(d).hasClass('active')){
+                              a.replaceWith(d.clone());
+                              d.replaceWith(a);
+                              sort(a);
+                            }
+                        }
+                        else {return;}
+                    }
+                }
+
+                function delTable(id) {
+                    var el = $('#_' + id);
+                    if(el[0].style.display != "none") {
+                        if(el[0].previousElementSibling != null) {
+                            el[0].previousElementSibling.style.display = "block";
+                        } else {
+                            el[0].parentElement.lastElementChild.style.display = "block";
+                        }                        
+                    }
+                    el.detach();
+                }
+
+                function addDelLeague(e) {
+                  var id = e.currentTarget.id;
+                  console.log(id);
+                  var arr = id.split('-').join(' ').split('_');
+                  var ff = $('table.matches');
+                  var isadd = false;
+                  var isDel = false;
+                  for(let i = 0; i < ff.length; i++) {  
+                      var idd = $($($($(ff[i]).children()[1]).children()[0]).children()[0]).attr('id'); 
+                      var a = $($(ff[i])[0]);
+                      if(idd === arr[1] || arr[2] === 'menu') { 
+                      console.log(idd);
+                      console.log(arr[1]);              
+                      if($($(ff[i])[0]).hasClass('active')) {
+                            $($(ff[i])[0]).removeClass('active');
+                            $('li#'+arr[1]).remove();
+                            adddel(arr[1], true);
+                            sort(a);
+                            if (!isDel) {
+                                delTable(arr[1]);
+                                var isDel = true;
+                            }
+                          } else {
+                            
+                              $($(ff[i])[0]).addClass('active');
+                              var country = $($(ff[i])[0]).text().split(':');
+                              sort(a);
+                              if(!isadd) {
+                                  load_table(arr[1]);
+                                  $('#my_league').append('<li id=' + arr[1] + 
+                                  '><div class="imgp"><img src="images/' + country[0] + '.png"><a href=\"#\">'+ arr[0] +
+                                    '</a></div><i class=\"fas fa-times\"></i></li>');
+                                  adddel(arr[1], false);
+                                  var isadd = true;
+                              }
+                          }
+                      }
                   }
+                }
+
+                $('.tabContainer').on('click',"i", function(e){
+                    addDelLeague(e)
                 });
+
+                function adddel(id, temp) {
+                    var data = { 
+                        id_league: id,
+                        flag: temp
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: '/api/auth/addleague'
+                    });
+                }
+
+                $("#my_league").on("click", "i", function(e) {
+                    var starId = this.parentElement.id;
+                    var ff = $('table.matches');
+                    $('li#'+starId).remove();
+                    adddel(starId, true);
+                    for(let i = 0; i < ff.length; i++) {
+                        var t = $(ff[i]).find('th')[0];                                          
+                        if($(t).attr('id') === starId) {
+                            $(ff[i]).removeClass('active');
+                            sort($(ff[i]));
+                            delTable(starId);
+                        }
+                    }
+                }); 
+
+                $(".left-sidebar").on("click", "i", function(e) {
+                    var elem = $(this)[0];
+                    if($(elem).hasClass('fa-star')) {
+                      addDelLeague(e);
+                    }
+                });             
+
+                setInterval(function () {
+                    $(".up_live").fadeIn(100).fadeOut(1000);
+                }, 500);
+
+                function load_data() {
+                    load_menu();
+                    load_matches();
+                    load_table();
+                }
+
+                function th_data(data, $tab) {
+                    $tab.append('<tr><th id='+ data.league_id +
+                    ' colspan="7"><div class="head_table"><div class="link_table"><img src="images/' + 
+                    data.country_name +'.png">' + 
+                    data.country_name + ': ' + 
+                    data.league_name + '<i class="fa fa-star" id = ' + 
+                    data.league_name.split(' ').join('-') + '_' + 
+                    data.league_id + '></i></div><a href="#">Таблица</a></div></th></tr>');                                    
+                }
+
+                function load_matches() {
+                    setTimeout(function(){
+                      load_matches();
+                    }, 30000); 
+                    var proc = [8, 10, 32, 8, 32, 6, 4];
+                    var data = { 
+                        today: $(".today").attr('id'),
+                        date: $(".active").attr('id')
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: '/api/loaddata/livegames'
+                    }).done(function(data) {
+                        if(data.ok) {
+                            $('#live_games').empty();
+                            var temp_live = data.lives[0].league_name;
+                            for(var k = 0; k < data.lives.length; k++) {
+                                if((k == 0 ) || (temp_live != data.lives[k].league_name)) {
+                                    var $table_live = $('<table/>');
+                                    $table_live.addClass('matches');
+                                    if(data.lives[k].isLeague) $table_live.addClass('active');
+                                    var $colgroup_live = $('<colgroup/>');
+                                    for(var j = 0; j < 7; j++) {
+                                        $colgroup_live.append('<col width="' + proc[j] + '%">');
+                                    }
+                                    $table_live.append($colgroup_live);
+                                    th_data(data.lives[k], $table_live);
+                                    temp_live = data.lives[k].league_name;
+                                }                              
+                                $table_live.append('<tr id='+ data.lives[k].match_id +'>' +
+                                    '<td>' + data.lives[k].match_time + '</td>' +
+                                    '<td style="color: red">' + data.lives[k].match_status + '</td>'+
+                                    '<td style="text-align: right">' + data.lives[k].match_hometeam_name + '</td>'+
+                                    '<td style="color: red">' + data.lives[k].match_hometeam_score + ' - ' + data.lives[k].match_awayteam_score + '</td>'+
+                                    '<td style="text-align: left">' + data.lives[k].match_awayteam_name + '</td>'+
+                                    '<td class="up_live" style="color: red">LIVE</td>'+
+                                    '<td><i class="fas fa-plus"></i></td>'+
+                                    '</tr>');
+                                $('#live_games').append($table_live);
+                                sort($table_live);
+                            } 
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: '/api/loaddata/games'
+                    }).done(function(data) {
+                      if(data.ok) {  
+                          $('#all_games').empty();                    
+                          $('#finished_games').empty();
+                          $('#scheduled').empty();
+
+                          var temp = data.games[0].league_name;
+                          for(var k = 0; k < data.games.length; k++) {
+                              if((k == 0 ) || (temp != data.games[k].league_name)) {
+                                  var $table_all = $('<table/>');
+                                  $table_all.addClass('matches');  
+                                  if(data.games[k].isLeague) $table_all.addClass('active');                                
+                                  var $colgroup = $('<colgroup/>');
+                                  for(var j = 0; j < 7; j++) {
+                                      $colgroup.append('<col width="' + proc[j] + '%">');
+                                  }
+                                  $table_all.append($colgroup);
+                                  th_data(data.games[k], $table_all);
+                                  temp = data.games[k].league_name;
+                              }
+
+                              if(data.games[k].match_live == 1) {
+                                $table_all.append('<tr id='+ data.games[k].match_id +'>' +
+                                    '<td>' + data.games[k].match_time + '</td>' +
+                                    '<td style="color: red">' + data.games[k].match_status + '</td>'+
+                                    '<td style="text-align: right">' + data.games[k].match_hometeam_name + '</td>'+
+                                    '<td style="color: red">' + data.games[k].match_hometeam_score + ' - ' + data.games[k].match_awayteam_score + '</td>'+
+                                    '<td style="text-align: left">' + data.games[k].match_awayteam_name + '</td>'+
+                                    '<td class="up_live" style="color: red">LIVE</td>'+
+                                    '<td><i class="fas fa-plus"></i></td>'+
+                                    '</tr>');
+                              } else {
+                                  $table_all.append('<tr id='+ data.games[k].match_id +'>' +
+                                      '<td>' + data.games[k].match_time + '</td>' +
+                                      '<td>' + data.games[k].match_status + '</td>'+
+                                      '<td style="text-align: right">' + data.games[k].match_hometeam_name + '</td>'+
+                                      '<td>' + data.games[k].match_hometeam_score + ' - ' + data.games[k].match_awayteam_score + '</td>'+
+                                      '<td style="text-align: left">' + data.games[k].match_awayteam_name + '</td>'+
+                                      '<td>' + data.games[k].match_hometeam_halftime_score + ' - ' + data.games[k].match_awayteam_halftime_score + '</td>'+
+                                      '<td><i class="fas fa-plus"></i></td>'+
+                                      '</tr>');
+                              }
+                              $('#all_games').append($table_all);
+                              sort($table_all);
+                          }                         
+                        
+                          var temp_fin = data.games[0].league_name;
+                          for(var k = 0; k < data.games.length; k++) {
+                            if(data.games[k].match_status == 'FT' || data.games[k].match_status == 'Postp.' || data.games[k].match_status == 'AAW') {
+                              if((k == 0 ) || (temp_fin != data.games[k].league_name)) {                               
+                                  var $table_fin = $('<table/>');
+                                  $table_fin.addClass('matches');
+                                  if(data.games[k].isLeague) $table_fin.addClass('active');   
+                                  var $colgroup_fin = $('<colgroup/>');
+                                  for(var j = 0; j < 7; j++) {
+                                      $colgroup_fin.append('<col width="' + proc[j] + '%">');
+                                  }
+                                  $table_fin.append($colgroup_fin);
+                                  th_data(data.games[k], $table_fin);
+                                  temp_fin = data.games[k].league_name;
+                              }                              
+                              $table_fin.append('<tr id='+ data.games[k].match_id +'>' +
+                                  '<td>' + data.games[k].match_time + '</td>' +
+                                  '<td>' + data.games[k].match_status + '</td>'+
+                                  '<td style="text-align: right">' + data.games[k].match_hometeam_name + '</td>'+
+                                  '<td>' + data.games[k].match_hometeam_score + ' - ' + data.games[k].match_awayteam_score + '</td>'+
+                                  '<td style="text-align: left">' + data.games[k].match_awayteam_name + '</td>'+
+                                  '<td>' + data.games[k].match_hometeam_halftime_score + ' - ' + data.games[k].match_awayteam_halftime_score + '</td>'+
+                                  '<td><i class="fas fa-plus"></i></td>'+
+                                  '</tr>');
+                              }
+                              $('#finished_games').append($table_fin);
+                              sort($table_fin);
+                          } 
+
+                          var temp_sched = data.games[0].league_name;
+                          for(var k = 0; k < data.games.length; k++) {
+                            if(data.games[k].match_status == '' ) {
+                              if((k == 0 ) || (temp_sched != data.games[k].league_name)) {
+                                  var $table_sched = $('<table/>');
+                                  $table_sched.addClass('matches');
+                                  if(data.games[k].isLeague) $table_sched.addClass('active');   
+                                  var $colgroup_sched = $('<colgroup/>');
+                                  for(var j = 0; j < 7; j++) {
+                                      $colgroup_sched.append('<col width="' + proc[j] + '%">');
+                                  }
+                                  $table_sched.append($colgroup_sched);
+                                  th_data(data.games[k], $table_sched);
+                                  temp_sched = data.games[k].league_name;
+                              }                              
+                              $table_sched.append('<tr id='+ data.games[k].match_id +'>' +
+                                  '<td>' + data.games[k].match_time + '</td>' +
+                                  '<td>' + data.games[k].match_status + '</td>'+
+                                  '<td style="text-align: right">' + data.games[k].match_hometeam_name + '</td>'+
+                                  '<td>' + data.games[k].match_hometeam_score + ' - ' + data.games[k].match_awayteam_score + '</td>'+
+                                  '<td style="text-align: left">' + data.games[k].match_awayteam_name + '</td>'+
+                                  '<td>' + data.games[k].match_hometeam_halftime_score + ' - ' + data.games[k].match_awayteam_halftime_score + '</td>'+
+                                  '<td><i class="fas fa-plus"></i></td>'+
+                                  '</tr>');
+                              }
+                              $('#scheduled').append($table_sched);
+                              sort($table_sched);
+                          }                          
+                        }
+                    });
+                }
+
+                function load_table(id) {
+                    var data = {
+                        id: id
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: '/api/loaddata/tables'
+                      }).done(function(data) {
+                          if(data.ok) {
+                              var $div = $('<div/>');
+                              $div.addClass('tables'); 
+                              $div.attr('id', '_' + data.tables[0].league_id);
+                              $div.append('<div class="name"><i class="fas fa-arrow-left"></i><div class="imgp"><img src="images/'+ 
+                              data.tables[0].country_name +'.png"><p>' + data.tables[0].league_name + 
+                                '</p></div><i class="fas fa-arrow-right"></i></div>');
+                              var proc = [7, 43, 7, 7, 7, 7, 15, 7];
+                              for(var k = 0; k < data.tables.length; k++) {
+                                  if(k == 0) {
+                                      var $table = $('<table/>');
+                                      $table.addClass('ttable');   
+                                      var $colgroup = $('<colgroup/>');
+                                      for(var j = 0; j < 8; j++) {
+                                          $colgroup.append('<col width="' + proc[j] + '%">');
+                                      }
+                                      $table.append($colgroup); 
+                                      $table.append('<tr><th>№</th><th>Команда</th><th>И</th><th>В</th><th>Н</th><th>П</th><th>Г</th><th>0</th></tr>');                                   
+                                  }
+                                  $table.append('<tr><td>'+data.tables[k].overall_league_position+
+                                    '</td><td style="text-align: left">'+data.tables[k].team_name+
+                                      '</td><td>'+data.tables[k].overall_league_payed+
+                                        '</td><td>'+data.tables[k].overall_league_W+
+                                          '</td><td>'+data.tables[k].overall_league_D+
+                                            '</td><td>'+data.tables[k].overall_league_L+
+                                              '</td><td>'+data.tables[k].overall_league_GF+'-'+data.tables[k].overall_league_GA+
+                                                '</td><td>'+data.tables[k].overall_league_PTS+'</td></tr>');                                
+                              }
+                              $div.append($table); 
+                              $('.name_tables').append($div);
+                              if(($('.name_tables').children().length) > 1) {
+                                $div.hide();
+                              }                        
+                          }
+                      });
+                }
+
+                function load_menu() {
+                    $.ajax({
+                      type: 'POST',
+                      contentType: 'application/json',
+                      url: '/api/loaddata/leagues'
+                    }).done(function(data) {
+                        if(data.ok) {
+                            if(data.col != undefined) {
+                              console.log(data.col);
+                              for(let j = 0; j < data.col[0].leagues_id.length; j++) {
+                                  var ter = (data.leagues.find(x => x.league_id === data.col[0].leagues_id[j]));
+                                  $('#my_league').append('<li id=' + ter.league_id + 
+                                  '><div class="imgp"><img src="images/'+ ter.country_name +'.png"><a href=\"#\">'+ ter.league_name +
+                                    '</a></div><i class=\"fas fa-times\"></i></li>');
+                                    load_table(data.col[0].leagues_id[j]);                                 
+                              }
+                            }
+                          
+                            var temp = data.leagues[0].country_name;
+                            for(let i = 0; i < data.leagues.length; i++) {
+                                if(i == 0 || (temp != data.leagues[i].country_name)) {
+                                    var $btn_country = $('<button/>');
+                                    $btn_country.addClass('leftbar_btn country');
+                                    $btn_country.append('<div class="imgp"><img src="images/' + data.leagues[i].country_name + '.png">'+data.leagues[i].country_name+'</div><i class="fas fa-caret-down"></i>');
+                                    $('.left-sidebar').append($btn_country);
+                                    var $ul_leagues = $('<ul/>');
+                                    $ul_leagues.addClass('left-sidebar-menu');
+                                    temp = data.leagues[i].country_name;
+                                }
+                                $ul_leagues.append('<li><a href="#">'+
+                                  data.leagues[i].league_name+'</a><div class="add_league_menu"><i class=\"fas fa-star\" id = ' + 
+                                  data.leagues[i].league_name.split(' ').join('-') + '_' + 
+                                  data.leagues[i].league_id + '></div></li><hr>');
+                                $('.left-sidebar').append($ul_leagues);
+                            }
+                        }
+                    });
+                }
+
+                $('.name_tables').on('click', 'i', function(e) {
+                    var el = $(this).parents('.tables')[0];
+                    if($(this).hasClass('fa-arrow-left')) {
+                        var prevEl = el.previousElementSibling;
+                        if(prevEl === null) {
+                            prevEl = el.parentElement.lastElementChild
+                        }
+                        $(el).hide(); 
+                        $(prevEl).show();
+                    } else {
+                        var nextEl = el.nextElementSibling;
+                        if(nextEl === null) {
+                            nextEl = el.parentElement.firstElementChild
+                        }
+                        $(el).hide(); 
+                        $(nextEl).show();
+                    }
+                });
+
+                $('.left-sidebar').on('click', "button", function(e){
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling; 
+                    if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                    } else {
+                    dropdownContent.style.display = "block";
+                    }
+                });
+
+                $('.buttonContainer').on('click',"button", function(e){
+                    if($(this).text() == "Live") {
+                        $('.dateofmatch').find("button").attr("style", "font-size: 0px")
+                    }
+                    else {
+                        $('.dateofmatch').find("button").attr("style", "font-size: 12px")
+                    }
+                });
+
+                $('.dateofmatch').on('click',"button", function(e){
+                    if(!$(this).hasClass('active')) {
+                        $('.dateofmatch').find('.active').removeClass('active');
+                        $(this).addClass('active');
+                        load_matches();
+                    }
+                });
+
+                
 
   var $overlay = $('.overlay');
   var $mainPopUp = $('.main-popup')
@@ -195,7 +597,6 @@
       passwordConfirm: $('#password-confirmation').val(),
       acceptTerms: $('#accept-terms').attr("checked")
     };
-    console.log(data.acceptTerms);
     $.ajax({
       type: 'POST',
       data: JSON.stringify(data),
@@ -254,6 +655,7 @@
       }
     });
   });
+  load_data();  
 });
 </script>
 

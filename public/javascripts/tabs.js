@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // eslint-disable-next-line no-undef
 var tabButtons=document.querySelectorAll(".tabContainer .buttonContainer button");
 // eslint-disable-next-line no-undef
@@ -17,3 +18,11 @@ function showPanel(panelIndex,colorCode) {
     tabPanels[panelIndex].style.backgroundColor=colorCode;
 }
 showPanel(0,'#403f3f');
+
+// function delLeague(e) {
+//     var elem = e.parentNode.id;
+//     document.getElementById(elem).remove();
+//     document.getElementById(elem).remove();    
+// }
+
+// delLeague();

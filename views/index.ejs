@@ -1,97 +1,46 @@
 <% include layout/header.ejs %>
-<div class="dateofmatch">
-    <button onclick="">01.05 Пн</button>
-    <button onclick="">02.05 Вт</button>                 
-    <button onclick="">02.05 Ср</button>                 
-    <button onclick="">02.05 Чт</button>                 
-    <button onclick="">02.05 Пт</button>                 
-    <button onclick="" style="background-color: #c9aa03">02.05 Сб</button>                 
-    <button onclick="">02.05 Вс</button>                 
-    <button onclick="">02.05 Пн</button>                 
-    <button onclick="">02.05 Вт</button>                 
-    <button onclick="">02.05 Ср</button>                 
-    <button onclick="">02.05 Чт</button>                                 
-</div>
-<div class="tabContainer">
-        <div class="buttonContainer">
-            <button onclick="showPanel(0,'#403f3f')">Все</button>
-            <button onclick="showPanel(1,'#403f3f')">Live</button>
-            <button onclick="showPanel(2,'#403f3f')">Завершенные</button>
-            <button onclick="showPanel(3,'#403f3f')">Расписание</button>
-            <button onclick="showPanel(4,'#403f3f')">Мои игры</button>
+<div class="main">
+        <div class="row">
+    
+            <div class="col-md-2">
+                <div class="left-sidebar">               
+                    <button class="leftbar_btn">
+                        <i class="fa fa-star"></i>Мои лиги
+                    </button>
+                    <ul class="left-side-menu" id="my_league"></ul>
+                    <hr>
+            
+                    <button class="leftbar_btn">
+                        <i class="fa fa-star"></i>Мои команды
+                    </button>
+                    <hr>
+            
+                    <p>Страны</p>
+                    <hr>
+                </div>
+            </div>
+    
+            <div class="col-md-7" >
+                <div class="dateofmatch"></div>
+                <div class="tabContainer">
+                    <div class="buttonContainer">
+                        <button onclick="showPanel(0,'#403f3f')">Все</button>
+                        <button onclick="showPanel(1,'#403f3f')">Live</button>
+                        <button onclick="showPanel(2,'#403f3f')">Завершенные</button>
+                        <button onclick="showPanel(3,'#403f3f')">Расписание</button>
+                        <button onclick="showPanel(4,'#403f3f')">Мои игры</button>
+                    </div>
+                    <div class="tabPanel" id="all_games"></div>
+                    <div class="tabPanel" id="live_games"></div>
+                    <div class="tabPanel" id="finished_games"></div>
+                    <div class="tabPanel" id="scheduled"></div>
+                    <div class="tabPanel" id="my_games"></div>
+                </div>
+            </div>
+    
+            <div class="col-md-3">
+                <div class="name_tables"></div>
+            </div>
         </div>
-        <div class="tabPanel" id="tab1">
-            <% for (var i = 0; i < data.country_league.length; i++) {%>
-            <table class="matches" id="cs">
-                <colgroup>
-                    <col width="8%">
-                    <col width="14%">
-                    <col width="29%">
-                    <col width="8%">
-                    <col width="29%">
-                    <col width="8%">
-                    <col width="4%">
-                </colgroup>
-                <tr>
-                    <th colspan="7"><i class="fa fa-flag-usa"></i><%=data.country_league[i].country_name%>: <%=data.country_league[i].league_name%><i class="fa fa-star" id="<%=data.country_league[i].league_name%>"></i></th>
-                </tr>
-                <%for(var j = data.count_match[i]; j < data.count_match[i + 1]; j++) {%>
-                <%if (data.games[j].match_live == 1) {%>
-                <tr>
-                    <td><%=data.games[j].match_time%></td>
-                    <td style="color: red"><%=data.games[j].match_status%></td>
-                    <td style="text-align: right"><%=data.games[j].match_hometeam_name%></td>
-                    <td style="color: red"><%=data.games[j].match_hometeam_score%> - <%=data.games[j].match_awayteam_score%></td>
-                    <td style="text-align: left"><%=data.games[j].match_awayteam_name%></td>
-                    <td style="color: red"><%=data.games[j].match_hometeam_halftime_score%> - <%=data.games[j].match_awayteam_halftime_score%></td>
-                    <td><i class="fas fa-plus"></i></td>
-                </tr>
-                <%} else {%>
-                <tr>
-                    <td><%=data.games[j].match_time%></td>
-                    <td><%=data.games[j].match_status%></td>
-                    <td style="text-align: right"><%=data.games[j].match_hometeam_name%></td>
-                    <td><%=data.games[j].match_hometeam_score%> - <%=data.games[j].match_awayteam_score%></td>
-                    <td style="text-align: left"><%=data.games[j].match_awayteam_name%></td>
-                    <td><%=data.games[j].match_hometeam_halftime_score%> - <%=data.games[j].match_awayteam_halftime_score%></td>
-                    <td><i class="fas fa-plus"></i></td>
-                </tr>
-                <%}}%>
-            </table>
-            <% }%>
-        </div>
-        <div class="tabPanel">
-            <% for (var i = 0; i < data.live_con.length; i++) {%>
-                <table class="matches" id="cs">
-                    <colgroup>
-                        <col width="8%">
-                        <col width="14%">
-                        <col width="29%">
-                        <col width="8%">
-                        <col width="29%">
-                        <col width="8%">
-                        <col width="4%">
-                    </colgroup>
-                    <tr>
-                        <th colspan="7"><i class="fa fa-flag-usa"></i><%=data.live_con[i].country_name%>: <%=data.live_con[i].league_name%><i class="fa fa-star"></i></th>
-                    </tr>
-                    <%for(var j = data.live_matches[i]; j < data.live_matches[i + 1]; j++) {%>
-                    <tr>
-                        <td><%=data.games[j].match_time%></td>
-                        <td style="color: red"><%=data.games[j].match_status%></td>
-                        <td style="text-align: right"><%=data.games[j].match_hometeam_name%></td>
-                        <td style="color: red"><%=data.games[j].match_hometeam_score%> - <%=data.games[j].match_awayteam_score%></td>
-                        <td style="text-align: left"><%=data.games[j].match_awayteam_name%></td>
-                        <td style="color: red"><%=data.games[j].match_hometeam_halftime_score%> - <%=data.games[j].match_awayteam_halftime_score%></td>
-                        <td><i class="fas fa-plus"></i></td>
-                    </tr>
-                    <%}%>
-                </table>
-                <% }%>
-        </div>
-        <div class="tabPanel">Tab 3:Content</div>
-        <div class="tabPanel">Tab 4:Content</div>
-        <div class="tabPanel">Tab 4:Content</div>
     </div>
-
 <% include layout/footer.ejs %>

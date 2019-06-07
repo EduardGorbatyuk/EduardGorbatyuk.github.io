@@ -11,7 +11,9 @@ const schema = new Schema(
     password: {
       type: String,
       required: true
-    }
+    },
+    leagues_id: [],  
+    clubs_id: [] 
   },
   {
     timestamps: true

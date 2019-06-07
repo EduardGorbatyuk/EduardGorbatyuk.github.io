@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 const models = require('../models');
 
-// POST is authorized
+// POST is reg
 router.post('/register', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -147,5 +147,42 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
   }
 });
+
+router.post('/addleague', async (req, res) => {
+    const id = req.body.id_league;
+    const flag = req.body.flag;
+    if(req.session) {
+      if(flag) {
+          let coll = await models.User.findOneAndUpdate(
+            { _id: req.session.userId },
+            { $pull: {leagues_id: id} }
+          );
+          if(coll) {
+            res.json({
+              ok: true
+            });
+          } else {
+              res.json({
+                ok: false
+              });
+          }
+        } else {
+            var coll = await models.User.findOneAndUpdate(
+              { _id: req.session.userId },
+              { $addToSet: {leagues_id: id} }
+            );
+            if(coll) {
+                res.json({
+                  ok: true
+                });
+            } else {
+                res.json({
+                  ok: false
+                });
+            }
+        }
+    }
+});
+
 
 module.exports = router;

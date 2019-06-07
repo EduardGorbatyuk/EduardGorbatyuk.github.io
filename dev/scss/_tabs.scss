@@ -52,6 +52,13 @@
     background-color: #04883b;
     color: #fff;
 }
+
 .dateofmatch button:hover {
     transition: 0.5s;
+}
+
+.dateofmatch .active {
+    background-color: $color-gold;
+    color: #000;
+    cursor: default;
 }
