@@ -1,2 +1,2 @@
-# EduardGorbatyuk.github.io
+# EGScore
 MyScore
